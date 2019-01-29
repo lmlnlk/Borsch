@@ -21,6 +21,9 @@ class FridgeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "Ингредиенты"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         initIngredient()
 
