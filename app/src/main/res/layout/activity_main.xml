@@ -5,19 +5,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".recipes.MainActivity">
 
     <include android:id="@+id/toolbar"
              layout="@layout/bar_item"/>
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/list_recipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:layout_below="@id/toolbar"
-            app:layoutManager="LinearLayoutManager">
+            android:layout_below="@id/toolbar">
 
     </android.support.v7.widget.RecyclerView>
 

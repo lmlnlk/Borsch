@@ -1,20 +1,21 @@
-package com.example.borsh
+package com.example.borsh.recipes
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import com.example.borsh.adapter.RVAdapter
-import com.example.borsh.model.Recipe
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.example.borsh.fridge.FridgeActivity
+import com.example.borsh.R
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecipeView {
 
-    private var recipes: List<Recipe> = ArrayList()
+    private val presenter = RecipeListPresenter()
+    private val adapter = RVAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,22 +26,24 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.title = ""
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        initData()
-
-        val recyclerView = findViewById<RecyclerView>(R.id.list)
-        recyclerView.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(applicationContext)
-       // linearLayoutManager.stackFromEnd = true
-        recyclerView.layoutManager = linearLayoutManager
-        val adapter = RVAdapter(this, recipes)
-
+        val recyclerView = findViewById<RecyclerView>(R.id.list_recipe)
+        //recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
 
-    private fun initData(){
-        (recipes as ArrayList<Recipe>).add(Recipe("Борщ"))
-        (recipes as ArrayList<Recipe>).add(Recipe("Пельмени"))
-        (recipes as ArrayList<Recipe>).add(Recipe("Плов"))
+    override fun showRecipe(recipes: List<String>) {
+        adapter.setPersons(recipes)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.bindView(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.unbindView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
