@@ -4,12 +4,13 @@ import com.example.borsh.models.response.IngredientResponse
 import com.example.borsh.models.response.RecipeResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface Api {
 
-    @GET("people")
+    @GET("/recipe")
     fun getAllRecipe(): Call<RecipeResponse>
 
-    @GET("planets")
+    @GET("/user/5c4edc01fc79b221b47f0d68/fridge")
     fun getAllIngredient(): Call<IngredientResponse>
 }

@@ -1,5 +1,7 @@
 package com.example.borsh.recipes
 
+import android.net.http.HttpResponseCache
+import android.util.Log
 import com.example.borsh.App
 import com.example.borsh.models.api.Api
 import com.example.borsh.models.response.RecipeResponse
@@ -16,16 +18,18 @@ class RecipeListPresenter {
     }
 
     private fun updateRecipe() {
-        App.retrofit
-            .create(Api::class.java)
+        App.api
             .getAllRecipe()
             .enqueue(object : Callback<RecipeResponse> {
                 override fun onFailure(call: Call<RecipeResponse>, t: Throwable) {
-
+                    Log.e("asd", t.message)
                 }
 
                 override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
-                    val recipes = response.body()?.results?.map { it.name }
+                    val recipes = response.body()?.content?.map { it.name }
+
+                    Log.i("Recipes = ", recipes.toString())
+                    Log.i("STATUS = ", response.code().toString())
 
                     if (recipes != null) {
                         view?.showRecipe(recipes)

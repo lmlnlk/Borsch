@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.widget.Toast
 import com.example.borsh.R
-import com.example.borsh.models.response.Ingredient
 
 class FridgeActivity : AppCompatActivity(), FridgeView {
 
@@ -44,4 +44,7 @@ class FridgeActivity : AppCompatActivity(), FridgeView {
         adapter.setIngredient(ingredients)
     }
 
+    override fun showBodyIsNullError() {
+        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+    }
 }

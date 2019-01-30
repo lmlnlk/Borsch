@@ -1,5 +1,6 @@
 package com.example.borsh.fridge
 
+import android.util.Log
 import com.example.borsh.App
 import com.example.borsh.models.api.Api
 import com.example.borsh.models.response.IngredientResponse
@@ -17,8 +18,7 @@ class FridgeListPresenter {
     }
 
     private fun updateIngredient(){
-        App.retrofit
-            .create(Api::class.java)
+        App.api
             .getAllIngredient()
             .enqueue(object : Callback<IngredientResponse>{
                 override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
@@ -26,7 +26,10 @@ class FridgeListPresenter {
                 }
 
                 override fun onResponse(call: Call<IngredientResponse>, response: Response<IngredientResponse>) {
-                    val ingredients = response.body()?.results?.map { it.name }
+                    val ingredients = response.body()?.content?.fridge?.map { it.ingredient.name }
+
+                    Log.i("Ingredients = ", ingredients.toString())
+                    Log.i("STATUS = ", response.code().toString())
 
                     if(ingredients != null){
                         view?.showFridge(ingredients)
