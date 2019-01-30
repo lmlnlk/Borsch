@@ -4,7 +4,7 @@
           package="com.example.borsh">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
             android:name=".App"
@@ -30,6 +30,10 @@
                 android:name=".fridge.FridgeActivity"
                 android:screenOrientation="portrait">
         </activity>
+        <activity
+                android:name=".add_recipe.AddRecipeActivity"
+                android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

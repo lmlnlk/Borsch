@@ -2,7 +2,6 @@ package com.example.borsh.fridge
 
 import android.util.Log
 import com.example.borsh.App
-import com.example.borsh.models.api.Api
 import com.example.borsh.models.response.IngredientResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +18,7 @@ class FridgeListPresenter {
 
     private fun updateIngredient(){
         App.api
-            .getAllIngredient()
+            .getPersonIngredients()
             .enqueue(object : Callback<IngredientResponse>{
                 override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
 
