@@ -1,4 +1,4 @@
-package com.example.borsh.models.response
+package com.example.borsh.models.response.fridge
 
 class Fridge(val fridge: List<Foo>)
 

@@ -8,14 +8,17 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.example.borsh.fridge.FridgeActivity
 import com.example.borsh.R
+import com.example.borsh.addrecipe.AddRecipeActivity
+import com.example.borsh.models.response.recipes.Recipe
 
 
 class MainActivity : AppCompatActivity(), RecipeView {
 
     private val presenter = RecipeListPresenter()
-    private val adapter = RVAdapter(this)
+    private val adapter = RVAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +33,15 @@ class MainActivity : AppCompatActivity(), RecipeView {
         //recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
+        val button = findViewById<Button>(R.id.add_recipe)
+        button.setOnClickListener {
+            val intent = Intent(this, AddRecipeActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    override fun showRecipe(recipes: List<String>) {
+    override fun showRecipe(recipes: List<Recipe>) {
         adapter.setPersons(recipes)
     }
 

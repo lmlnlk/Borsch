@@ -2,8 +2,7 @@ package com.example.borsh.fridge
 
 import android.util.Log
 import com.example.borsh.App
-import com.example.borsh.models.api.Api
-import com.example.borsh.models.response.IngredientResponse
+import com.example.borsh.models.response.fridge.IngredientResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

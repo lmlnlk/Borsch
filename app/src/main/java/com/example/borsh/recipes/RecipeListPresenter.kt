@@ -1,10 +1,8 @@
 package com.example.borsh.recipes
 
-import android.net.http.HttpResponseCache
 import android.util.Log
 import com.example.borsh.App
-import com.example.borsh.models.api.Api
-import com.example.borsh.models.response.RecipeResponse
+import com.example.borsh.models.response.recipes.RecipeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,7 +15,7 @@ class RecipeListPresenter {
         updateRecipe()
     }
 
-    private fun updateRecipe() {
+     private fun updateRecipe() {
         App.api
             .getAllRecipe()
             .enqueue(object : Callback<RecipeResponse> {
@@ -26,8 +24,10 @@ class RecipeListPresenter {
                 }
 
                 override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
-                    val recipes = response.body()?.content?.map { it.name }
+                    val recipes = response.body()?.content
+                    val id = response.body()?.content?.map { it.id }
 
+                    Log.i("ID = ", id.toString())
                     Log.i("Recipes = ", recipes.toString())
                     Log.i("STATUS = ", response.code().toString())
 

@@ -7,28 +7,59 @@ import android.view.ViewGroup
 import com.example.borsh.R
 import kotlinx.android.synthetic.main.ingregient_item.view.*
 
-class FridgeAdapter: RecyclerView.Adapter<IngredientAdapter>() {
+class FridgeAdapter(private val isSelectEnabled: Boolean): RecyclerView.Adapter<FridgeHolder>() {
 
-    private val ingredients: MutableList<String> = mutableListOf()
+    private val list = mutableListOf<Pair<Boolean, String>>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): IngredientAdapter =
-        IngredientAdapter(LayoutInflater.from(parent.context).inflate(R.layout.ingregient_item, parent, false))
+    private val ingredients: List<String>
+    get() = list.map { it.second }
+
+    val selectedIngredients: List<String>
+        get() = list.filter { it.first }.map { it.second }
+
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): FridgeHolder =
+        FridgeHolder(LayoutInflater.from(parent.context).inflate(R.layout.ingregient_item, parent, false))
 
     override fun getItemCount(): Int = ingredients.size
 
-    override fun onBindViewHolder(holder: IngredientAdapter, position: Int) {
-        holder.bind(ingredients[position])
+    override fun onBindViewHolder(holder: FridgeHolder, position: Int) {
+        val title = ingredients[position]
+        holder.bind(title)
+        holder.itemView.setOnClickListener {
+            if (isSelectEnabled) {
+                val pair = list[position]
+                list.removeAt(position)
+                list.add(position, !pair.first to pair.second)
+
+                if (!pair.first) holder.swapBackGroundSeleted()
+                else holder.swapBackGroundUnseleted()
+            }
+        }
     }
 
     fun setIngredient(ingredient: List<String>){
-        this.ingredients.clear()
-        this.ingredients.addAll(ingredient)
+
+        val map = ingredient.map { false to it }
+
+        list.clear()
+        list.addAll(map)
+
         notifyDataSetChanged()
     }
 }
 
-class IngredientAdapter(view: View): RecyclerView.ViewHolder(view){
+class FridgeHolder(view: View): RecyclerView.ViewHolder(view){
     fun bind(title: String){
         itemView.ingredient_item.text = title
     }
+
+    fun swapBackGroundUnseleted() {
+        itemView.setBackgroundColor(999)
+    }
+
+    fun swapBackGroundSeleted() {
+        itemView.setBackgroundColor(889)
+    }
+
+
 }

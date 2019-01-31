@@ -1,31 +1,34 @@
-package com.example.borsh.fridge
+package com.example.borsh.ingredients
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.widget.Toast
 import com.example.borsh.R
 
-class FridgeActivity : AppCompatActivity(), FridgeView {
+const val EXTRA_ID = "ID"
 
-    private val presenter = FridgeListPresenter()
-    private val adapter = FridgeAdapter(false)
+class RecipeActivity : AppCompatActivity(), IngredientView {
+
+    private val presenter = IngredientListPresenter()
+    private val adapter = IngredientAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fridge)
+        setContentView(R.layout.activity_recipe)
+
+        presenter.updateIngredient(intent.getStringExtra(EXTRA_ID))
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar!!.title = "Ингредиенты"
+        supportActionBar!!.title = "Необходимые ингредиенты"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
             finish()
         }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.ingredient_list)
+        val recyclerView = findViewById<RecyclerView>(R.id.recipe_struct)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
@@ -40,11 +43,7 @@ class FridgeActivity : AppCompatActivity(), FridgeView {
         presenter.unbindView()
     }
 
-    override fun showFridge(ingredients: List<String>) {
-        adapter.setIngredient(ingredients)
-    }
-
-    override fun showBodyIsNullError() {
-        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+    override fun showIngredient(ingredients: List<String>) {
+        adapter.setInstance(ingredients)
     }
 }
