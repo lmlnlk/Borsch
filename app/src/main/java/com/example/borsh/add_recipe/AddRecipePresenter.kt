@@ -41,7 +41,7 @@ class AddRecipePresenter {
     }
 
     fun createReceipt(ingredientList: List<String>) {
-        recipe.ingredients = ingredientList
+        recipe.ingredient = ingredientList
     }
 
     fun unbindView() {

@@ -33,7 +33,7 @@ class RVAdapter(var mContext: Context): RecyclerView.Adapter<RecipeHolder>(){
 
         holder.setItemClickListener(object : ItemClickListener {
             override fun onClick(view: View, position: Int) {
-            val recipeIntent = Intent(mContext, RecipeActivity::class.java)
+                val recipeIntent = Intent(mContext, RecipeActivity::class.java)
                 mContext.startActivity(recipeIntent)
             }
         })
