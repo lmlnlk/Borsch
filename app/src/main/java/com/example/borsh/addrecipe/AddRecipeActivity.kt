@@ -5,24 +5,31 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
-import com.example.borsh.App
+import android.support.v7.widget.Toolbar
+import android.widget.Toast
 import com.example.borsh.R
 import kotlinx.android.synthetic.main.activity_add_recipe.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
 
     private val presenter = AddRecipePresenter()
 
     override fun showAddRecipe(allIngredients: List<String>) {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_recipe)
+
+        val toolbar  = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = "Добавить рецепт"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
 
         editNameRecipe.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -60,6 +67,9 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ingredientList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner1.adapter = adapter
+        spinner2.adapter = adapter
+        spinner3.adapter = adapter
+        spinner4.adapter = adapter
     }
 
 

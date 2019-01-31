@@ -38,12 +38,15 @@ class AddRecipePresenter {
             })
     }
 
+
+
     fun changeName(name: String) {
         recipe.name = name
     }
 
     fun createReceipt(ingredientList: List<String>) {
         recipe.ingredient = ingredientList
+
     }
 
     fun unbindView() {

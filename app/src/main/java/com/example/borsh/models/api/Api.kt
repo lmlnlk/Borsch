@@ -1,5 +1,8 @@
 package com.example.borsh.models.api
 
+import com.example.borsh.addrecipe.AddRecipeActivity
+import com.example.borsh.addrecipe.AddRecipePresenter
+import com.example.borsh.models.request.AddRecipeRequest
 import com.example.borsh.models.response.AllIngredientResponse
 import com.example.borsh.models.response.contentrecipe.BaseResponse
 import com.example.borsh.models.response.contentrecipe.ContentRecipe
@@ -27,5 +30,8 @@ interface Api {
     fun getAllIngredients(): Call<AllIngredientResponse>
 
     @POST("/recipe/")
-    fun addRecipe(@Body receipt: IngredientObj)
+    fun addRecipe(@Body receipt: IngredientObj): Call<AddRecipeRequest>
+
+
+
 }
