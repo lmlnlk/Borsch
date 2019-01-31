@@ -1,6 +1,6 @@
 package com.example.borsh.models.api
 
-import com.example.borsh.models.response.AllIngredientsRespons
+import com.example.borsh.models.response.AllIngredientsResponse
 import com.example.borsh.models.response.IngredientResponse
 import com.example.borsh.models.response.RecipeResponse
 import retrofit2.Call
@@ -16,6 +16,6 @@ interface Api {
     fun getPersonIngredients(): Call<IngredientResponse>
 
     @GET("/ingredients")
-    fun getAllIngredients(): Call<AllIngredientsRespons>
+    fun getAllIngredients(): Call<AllIngredientsResponse>
 
 }

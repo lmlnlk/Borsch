@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.example.borsh.fridge.FridgeActivity
 import com.example.borsh.R
+import com.example.borsh.add_recipe.AddRecipeActivity
 
 
 class MainActivity : AppCompatActivity(), RecipeView {
@@ -30,6 +32,14 @@ class MainActivity : AppCompatActivity(), RecipeView {
         //recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
+        val button = findViewById<Button>(R.id.new_recipe_Btn)
+
+        button.setOnClickListener {
+            val intent = Intent(this, AddRecipeActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun showRecipe(recipes: List<String>) {
@@ -52,7 +62,7 @@ class MainActivity : AppCompatActivity(), RecipeView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.fridge -> {
                 startActivity(Intent(this@MainActivity, FridgeActivity::class.java))
                 return true
@@ -60,6 +70,4 @@ class MainActivity : AppCompatActivity(), RecipeView {
         }
         return false
     }
-
-
 }

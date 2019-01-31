@@ -19,6 +19,7 @@
     >
 
         <EditText
+                android:id="@+id/editNameRecipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
@@ -26,22 +27,22 @@
         </EditText>
 
         <Spinner
-                android:id="@+id/apinner1"
+                android:id="@+id/spinner1"
                 android:layout_margin="8dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"/>
         <Spinner
-                android:id="@+id/apinner2"
+                android:id="@+id/spinner2"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_margin="8dp"/>
         <Spinner
-                android:id="@+id/apinner3"
+                android:id="@+id/spinner3"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_margin="8dp"/>
         <Spinner
-                android:id="@+id/apinner4"
+                android:id="@+id/spinner4"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_margin="8dp"/>
