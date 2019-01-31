@@ -2,14 +2,17 @@ package com.example.borsh.addrecipe
 
 import android.util.Log
 import com.example.borsh.App
+import com.example.borsh.models.response.AllIngredientResponse
 import com.example.borsh.models.response.contentrecipe.IngredientObj
 import com.example.borsh.models.response.fridge.IngredientResponse
+import com.example.borsh.models.response.recipes.Recipe
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AddRecipePresenter {
 
+    private val recipe: Recipe = Recipe("","", mutableListOf())
     private var view: AddRecipeView? = null
 
     fun bindView(view: AddRecipeView) {
@@ -17,26 +20,30 @@ class AddRecipePresenter {
         updateAddRecipe()
     }
 
-    private fun updateAddRecipe(){
-//        App.api
-//            .addRecipe()
-//            .enqueue(object : Callback<IngredientObj> {
-//                override fun onFailure(call: Call<IngredientObj>, t: Throwable) {
-//
-//                }
-//
-//                override fun onResponse(call: Call<IngredientObj>, response: Response<IngredientObj>) {
-//                    val ingredients = response.body()?.ingredient?.name?.map { it. }
-//
-//                    Log.i("Ingredients = ", ingredients.toString())
-//                    Log.i("STATUS = ", response.code().toString())
-//
-//                    if(ingredients != null){
-//                        view?.showFridge(ingredients)
-//                    }
-//                }
-//
-//            })
+    private fun updateAddRecipe() {
+        App.api
+            .getAllIngredients()
+            .enqueue(object : Callback<AllIngredientResponse> {
+                override fun onFailure(call: Call<AllIngredientResponse>, t: Throwable) {}
+
+                override fun onResponse(
+                    call: Call<AllIngredientResponse>,
+                    response: Response<AllIngredientResponse>
+                ) {
+                    val ingredients = response.body()?.content?.map { it.name }
+
+                    if (ingredients != null)
+                        view?.showIngredients(ingredients)
+                }
+            })
+    }
+
+    fun changeName(name: String) {
+        recipe.name = name
+    }
+
+    fun createReceipt(ingredientList: List<String>) {
+        recipe.ingredient = ingredientList
     }
 
     fun unbindView() {

@@ -25,9 +25,9 @@ class RecipeListPresenter {
 
                 override fun onResponse(call: Call<RecipeResponse>, response: Response<RecipeResponse>) {
                     val recipes = response.body()?.content
-                    val id = response.body()?.content?.map { it.id }
+                   // val id = response.body()?.content?.map { it.id }
 
-                    Log.i("ID = ", id.toString())
+                   // Log.i("ID = ", id.toString())
                     Log.i("Recipes = ", recipes.toString())
                     Log.i("STATUS = ", response.code().toString())
 

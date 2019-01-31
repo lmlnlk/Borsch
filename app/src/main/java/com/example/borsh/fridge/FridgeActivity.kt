@@ -11,7 +11,7 @@ import com.example.borsh.R
 class FridgeActivity : AppCompatActivity(), FridgeView {
 
     private val presenter = FridgeListPresenter()
-    private val adapter = FridgeAdapter(false)
+    private val adapter = FridgeAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
