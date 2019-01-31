@@ -6,9 +6,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.support.v7.widget.Toolbar
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import com.example.borsh.R
 import kotlinx.android.synthetic.main.activity_add_recipe.*
+import kotlinx.android.synthetic.main.ingregient_item.*
 
 
 class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
@@ -22,7 +25,7 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_recipe)
 
-        val toolbar  = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "Добавить рецепт"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -46,9 +49,11 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         })
 
         createRecipebtn.setOnClickListener {
-            presenter.createReceipt(listOf(
-                spinner1.selectedItem as String
-            ))
+            presenter.createReceipt(
+                listOf(
+                    spinner1.selectedItem as String
+                )
+            )
         }
 
     }
@@ -56,6 +61,44 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
     override fun onStart() {
         super.onStart()
         presenter.bindView(this)
+        var ingList: MutableList<String> = mutableListOf()
+
+        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                ingList.add(parent.getItemAtPosition(position).toString())
+            }
+        }
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                ingList.add(parent.getItemAtPosition(position).toString())
+            }
+        }
+
+        spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                ingList.add(parent.getItemAtPosition(position).toString())
+            }
+        }
+
+        spinner4.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                ingList.add(parent.getItemAtPosition(position).toString())
+            }
+        }
+
+
     }
 
     override fun onStop() {
