@@ -1,5 +1,6 @@
 package com.example.borsh.add_recipe
 
 interface AddRecipeVeiw {
-    fun show
+    fun showAddRecipe(allIngredients: List<String>)
+    fun showIngredients(ingredientList: List<String>)
 }

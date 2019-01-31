@@ -11,15 +11,15 @@ class FridgeListPresenter {
 
     private var view: FridgeView? = null
 
-    fun bindView(view: FridgeView){
+    fun bindView(view: FridgeView) {
         this.view = view
         updateIngredient()
     }
 
-    private fun updateIngredient(){
+    private fun updateIngredient() {
         App.api
             .getPersonIngredients()
-            .enqueue(object : Callback<IngredientResponse>{
+            .enqueue(object : Callback<IngredientResponse> {
                 override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
 
                 }
@@ -30,7 +30,7 @@ class FridgeListPresenter {
                     Log.i("Ingredients = ", ingredients.toString())
                     Log.i("STATUS = ", response.code().toString())
 
-                    if(ingredients != null){
+                    if (ingredients != null) {
                         view?.showFridge(ingredients)
                     }
                 }
@@ -38,7 +38,7 @@ class FridgeListPresenter {
             })
     }
 
-    fun unbindView(){
+    fun unbindView() {
         this.view = null
     }
 }

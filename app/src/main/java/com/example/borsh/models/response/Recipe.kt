@@ -1,3 +1,3 @@
 package com.example.borsh.models.response
 
-class Recipe (val name: String)
+class Recipe (var name: String, var ingredients: List<String>)
