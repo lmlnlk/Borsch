@@ -4,15 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import com.example.borsh.R
 import com.example.borsh.addrecipe.AddRecipeActivity
 import com.example.borsh.fridge.FridgeActivity
 import com.example.borsh.models.response.recipes.Recipe
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), RecipeView {
@@ -24,18 +22,14 @@ class MainActivity : AppCompatActivity(), RecipeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.title = ""
+        setSupportActionBar(mainActivityToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.list_recipe)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        list_recipe.layoutManager = LinearLayoutManager(this)
+        list_recipe.adapter = adapter
 
-        val button = findViewById<Button>(R.id.add_recipe)
-        button.setOnClickListener {
-            val intent = Intent(this, AddRecipeActivity::class.java)
+        add_recipe.setOnClickListener{
+            val intent = Intent(this,AddRecipeActivity::class.java)
             startActivity(intent)
         }
     }

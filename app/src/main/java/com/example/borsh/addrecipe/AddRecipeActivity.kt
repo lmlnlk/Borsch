@@ -10,6 +10,7 @@ import com.example.borsh.models.response.fridge.Ingredient
 import kotlinx.android.synthetic.main.activity_add_recipe.*
 
 const val FROM: String = "5c4edc01fc79b221b47f0d68"
+
 class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
 
     private val presenter = AddRecipePresenter()
@@ -25,7 +26,6 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
                 presenter.changeName(text.toString())
             }
         })
-
         createRecipebtn.setOnClickListener {
             presenter.createReceipt(
                 editNameRecipe.text.toString(),
@@ -35,6 +35,13 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
             ))
         }
 
+        setSupportActionBar(addRecipeToolbar)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        addRecipeToolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     override fun onStart() {

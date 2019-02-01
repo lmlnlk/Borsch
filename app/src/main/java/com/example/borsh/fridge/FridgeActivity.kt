@@ -1,12 +1,11 @@
 package com.example.borsh.fridge
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.widget.Toast
 import com.example.borsh.R
+import kotlinx.android.synthetic.main.activity_fridge.*
 
 class FridgeActivity : AppCompatActivity(), FridgeView {
 
@@ -17,17 +16,14 @@ class FridgeActivity : AppCompatActivity(), FridgeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fridge)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.title = "Ингредиенты"
+        setSupportActionBar(fridgeToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener {
+        fridgeToolbar.setNavigationOnClickListener {
             finish()
         }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.ingredient_list)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+        ingredient_list.layoutManager = LinearLayoutManager(this)
+        ingredient_list.adapter = adapter
     }
 
     override fun onStart() {

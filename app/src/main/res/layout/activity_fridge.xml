@@ -7,8 +7,14 @@
         android:layout_height="match_parent"
         tools:context=".recipes.MainActivity">
 
-    <include android:id="@+id/toolbar"
-             layout="@layout/bar_item"/>
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/fridgeToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Холодильник"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle"/>
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredient_list"
@@ -16,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/fridgeToolbar"
             app:layoutManager="LinearLayoutManager">
 
     </android.support.v7.widget.RecyclerView>

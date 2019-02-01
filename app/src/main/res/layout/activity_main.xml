@@ -7,14 +7,20 @@
         android:layout_height="match_parent"
         tools:context=".recipes.MainActivity">
 
-    <include android:id="@+id/toolbar"
-             layout="@layout/bar_item"/>
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/mainActivityToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Рецепты"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle"/>
 
     <Button
             android:id="@+id/add_recipe"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/mainActivityToolbar"
             android:text="add new recipe"
             android:textSize="24sp"/>
 
