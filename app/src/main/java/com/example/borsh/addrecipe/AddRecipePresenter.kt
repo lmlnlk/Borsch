@@ -1,11 +1,12 @@
 package com.example.borsh.addrecipe
 
-import android.util.Log
 import com.example.borsh.App
+import com.example.borsh.models.request.NewRecipeRequest
 import com.example.borsh.models.response.AllIngredientResponse
-import com.example.borsh.models.response.contentrecipe.IngredientObj
-import com.example.borsh.models.response.fridge.IngredientResponse
+import com.example.borsh.models.response.contentrecipe.BaseResponse
+import com.example.borsh.models.response.fridge.Ingredient
 import com.example.borsh.models.response.recipes.Recipe
+import com.example.borsh.models.response.recipes.RecipeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +15,7 @@ class AddRecipePresenter {
 
     private val recipe: Recipe = Recipe("","", mutableListOf())
     private var view: AddRecipeView? = null
+    var newRecipeRequest: NewRecipeRequest = NewRecipeRequest("", mutableListOf())
 
     fun bindView(view: AddRecipeView) {
         this.view = view
@@ -30,7 +32,7 @@ class AddRecipePresenter {
                     call: Call<AllIngredientResponse>,
                     response: Response<AllIngredientResponse>
                 ) {
-                    val ingredients = response.body()?.content?.map { it.name }
+                    val ingredients = response.body()?.content?.map { it }
 
                     if (ingredients != null)
                         view?.showIngredients(ingredients)
@@ -42,9 +44,31 @@ class AddRecipePresenter {
         recipe.name = name
     }
 
-    fun createReceipt(ingredientList: List<String>) {
-        recipe.ingredient = ingredientList
+    fun createReceipt(name: String, ingredientList: List<Ingredient>) {
+        newRecipeRequest.name=name
+        newRecipeRequest.ingredient = ingredientList
+        postNewReceipt(newRecipeRequest)
     }
+
+
+    private fun postNewReceipt(newRecipeRequest: NewRecipeRequest){
+        App.api
+            .postNewRecipe(newRecipeRequest)
+            .enqueue(object :Callback<BaseResponse<RecipeResponse>> {
+                override fun onFailure(call: Call<BaseResponse<RecipeResponse>>, t: Throwable) {
+                }
+
+                override fun onResponse(
+                    call: Call<BaseResponse<RecipeResponse>>,
+                    response: Response<BaseResponse<RecipeResponse>>) {
+                    val recipes = response.body()?.content?.content?.map{ it.name}
+                    if(response.isSuccessful){
+
+                    }
+                }
+            })
+    }
+
 
     fun unbindView() {
         this.view = null

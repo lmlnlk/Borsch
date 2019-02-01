@@ -1,9 +1,9 @@
 package com.example.borsh.models.api
 
+import com.example.borsh.models.request.NewRecipeRequest
 import com.example.borsh.models.response.AllIngredientResponse
 import com.example.borsh.models.response.contentrecipe.BaseResponse
 import com.example.borsh.models.response.contentrecipe.ContentRecipe
-import com.example.borsh.models.response.contentrecipe.IngredientObj
 import com.example.borsh.models.response.fridge.IngredientResponse
 import com.example.borsh.models.response.recipes.RecipeResponse
 import retrofit2.Call
@@ -27,5 +27,6 @@ interface Api {
     fun getAllIngredients(): Call<AllIngredientResponse>
 
     @POST("/recipe/")
-    fun addRecipe(@Body receipt: IngredientObj)
+    fun postNewRecipe(@Body  newRecipeRequest: NewRecipeRequest):Call<BaseResponse<RecipeResponse>>
+
 }
