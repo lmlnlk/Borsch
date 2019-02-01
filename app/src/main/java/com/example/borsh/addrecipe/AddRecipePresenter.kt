@@ -2,12 +2,10 @@ package com.example.borsh.addrecipe
 
 import com.example.borsh.App
 import com.example.borsh.models.request.NewRecipeRequest
-import com.example.borsh.models.request.UserId
 import com.example.borsh.models.response.AllIngredientResponse
-import com.example.borsh.models.response.contentrecipe.BaseResponse
+import com.example.borsh.models.response.SuccessPostResponse
 import com.example.borsh.models.response.fridge.Ingredient
 import com.example.borsh.models.response.recipes.Recipe
-import com.example.borsh.models.response.recipes.RecipeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +16,7 @@ class AddRecipePresenter {
 
     private val recipe: Recipe = Recipe("", "", mutableListOf())
     private var view: AddRecipeView? = null
-    private var newRecipeRequest: NewRecipeRequest = NewRecipeRequest("",null, mutableListOf())
+    private var newRecipeRequest: NewRecipeRequest = NewRecipeRequest("","", mutableListOf())
 
 
 
@@ -50,7 +48,7 @@ class AddRecipePresenter {
     }
 
 
-    fun createReceipt(name: String, from:UserId, ingredientList: List<Ingredient>) {
+    fun createReceipt(name: String, from: String, ingredientList: List<Ingredient>) {
         newRecipeRequest.name = name
         newRecipeRequest.from = from
         newRecipeRequest.ingredient = ingredientList
@@ -61,15 +59,14 @@ class AddRecipePresenter {
     private fun postNewReceipt(newRecipeRequest: NewRecipeRequest) {
         App.api
             .postNewRecipe(newRecipeRequest)
-            .enqueue(object : Callback<BaseResponse<RecipeResponse>> {
-                override fun onFailure(call: Call<BaseResponse<RecipeResponse>>, t: Throwable) {
+            .enqueue(object : Callback<SuccessPostResponse> {
+                override fun onFailure(call: Call<SuccessPostResponse>, t: Throwable) {
                 }
 
                 override fun onResponse(
-                    call: Call<BaseResponse<RecipeResponse>>,
-                    response: Response<BaseResponse<RecipeResponse>>
+                    call: Call<SuccessPostResponse>,
+                    response: Response<SuccessPostResponse>
                 ) {
-                    val recipes = response.body()?.content?.content?.map { it.name }
                     if (response.isSuccessful) {
 
                     }

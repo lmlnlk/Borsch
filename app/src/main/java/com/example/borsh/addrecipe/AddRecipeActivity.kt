@@ -6,17 +6,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import com.example.borsh.R
-import com.example.borsh.models.request.UserId
 import com.example.borsh.models.response.fridge.Ingredient
 import kotlinx.android.synthetic.main.activity_add_recipe.*
 
-const val ROOM = 550
+const val from = "5c4edc01fc79b221b47f0d68"
 class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
 
     private val presenter = AddRecipePresenter()
-
-     val name: String = "Дмитрий"
-     val from : UserId = UserId(name,ROOM)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +29,10 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         })
 
         createRecipebtn.setOnClickListener {
-            presenter.createReceipt(editNameRecipe.text.toString(),from,listOf(
+            presenter.createReceipt(
+                editNameRecipe.text.toString(),
+                from,
+                listOf(
                 spinner1.selectedItem as Ingredient
             ))
         }

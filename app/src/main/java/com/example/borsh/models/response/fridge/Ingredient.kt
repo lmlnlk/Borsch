@@ -9,6 +9,5 @@ class Ingredient (
     @SerializedName("unit") val unit: String
 ) {
 
-    override fun toString(): String = name
-
+   override fun toString(): String = name
 }
