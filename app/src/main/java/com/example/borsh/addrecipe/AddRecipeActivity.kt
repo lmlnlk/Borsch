@@ -1,5 +1,6 @@
 package com.example.borsh.addrecipe
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -7,6 +8,7 @@ import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import com.example.borsh.R
 import com.example.borsh.models.response.fridge.Ingredient
+import com.example.borsh.recipes.MainActivity
 import kotlinx.android.synthetic.main.activity_add_recipe.*
 
 const val FROM: String = "5c4edc01fc79b221b47f0d68"
@@ -31,8 +33,13 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
                 editNameRecipe.text.toString(),
                 FROM,
                 listOf(
-                spinner1.selectedItem as Ingredient
+                spinner1.selectedItem as Ingredient,
+                spinner2.selectedItem as Ingredient,
+                spinner3.selectedItem as Ingredient,
+                spinner4.selectedItem as Ingredient
             ))
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
 
         setSupportActionBar(addRecipeToolbar)
@@ -58,5 +65,8 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, ingredientList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner1.adapter = adapter
+        spinner2.adapter = adapter
+        spinner3.adapter = adapter
+        spinner4.adapter = adapter
     }
 }
