@@ -1,17 +1,17 @@
 package com.example.borsh.recipes
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import com.example.borsh.fridge.FridgeActivity
 import com.example.borsh.R
 import com.example.borsh.addrecipe.AddRecipeActivity
+import com.example.borsh.fridge.FridgeActivity
 import com.example.borsh.models.response.recipes.Recipe
 
 
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity(), RecipeView {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val recyclerView = findViewById<RecyclerView>(R.id.list_recipe)
-        //recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
@@ -69,6 +68,4 @@ class MainActivity : AppCompatActivity(), RecipeView {
         }
         return false
     }
-
-
 }

@@ -9,7 +9,7 @@ import com.example.borsh.R
 import com.example.borsh.models.response.fridge.Ingredient
 import kotlinx.android.synthetic.main.activity_add_recipe.*
 
-const val from = "5c4edc01fc79b221b47f0d68"
+const val FROM: String = "5c4edc01fc79b221b47f0d68"
 class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
 
     private val presenter = AddRecipePresenter()
@@ -19,10 +19,8 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         setContentView(R.layout.activity_add_recipe)
 
         editNameRecipe.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 presenter.changeName(text.toString())
             }
@@ -31,7 +29,7 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         createRecipebtn.setOnClickListener {
             presenter.createReceipt(
                 editNameRecipe.text.toString(),
-                from,
+                FROM,
                 listOf(
                 spinner1.selectedItem as Ingredient
             ))
@@ -54,5 +52,4 @@ class AddRecipeActivity : AppCompatActivity(), AddRecipeView {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner1.adapter = adapter
     }
-
 }

@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 class NewRecipeRequest(
     @SerializedName("name") var name: String,
     @SerializedName("from") var from: String,
-    @SerializedName("ingredients") var ingredient: List<Ingredient> ) {
-}
+    @SerializedName("ingredients") var ingredient: List<Ingredient> )
 
 

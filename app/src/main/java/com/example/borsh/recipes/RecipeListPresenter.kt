@@ -36,7 +36,6 @@ class RecipeListPresenter {
                     }
                 }
             })
-         //view?.showRecipe((1..100).map { "Recipe $it" })
     }
 
     fun unbindView(){

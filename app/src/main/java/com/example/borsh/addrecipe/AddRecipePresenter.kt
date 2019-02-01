@@ -10,15 +10,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
 class AddRecipePresenter {
 
     private val recipe: Recipe = Recipe("", "", mutableListOf())
     private var view: AddRecipeView? = null
     private var newRecipeRequest: NewRecipeRequest = NewRecipeRequest("","", mutableListOf())
-
-
 
     fun bindView(view: AddRecipeView) {
         this.view = view
@@ -47,14 +43,12 @@ class AddRecipePresenter {
         recipe.name = name
     }
 
-
     fun createReceipt(name: String, from: String, ingredientList: List<Ingredient>) {
         newRecipeRequest.name = name
         newRecipeRequest.from = from
         newRecipeRequest.ingredient = ingredientList
         postNewReceipt(newRecipeRequest)
     }
-
 
     private fun postNewReceipt(newRecipeRequest: NewRecipeRequest) {
         App.api
@@ -67,13 +61,10 @@ class AddRecipePresenter {
                     call: Call<SuccessPostResponse>,
                     response: Response<SuccessPostResponse>
                 ) {
-                    if (response.isSuccessful) {
-
-                    }
+                    if (response.isSuccessful) {}
                 }
             })
     }
-
 
     fun unbindView() {
         this.view = null

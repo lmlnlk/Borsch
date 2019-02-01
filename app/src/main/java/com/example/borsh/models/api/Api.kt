@@ -29,5 +29,4 @@ interface Api {
 
     @POST("/recipe/")
     fun postNewRecipe(@Body  newRecipeRequest: NewRecipeRequest):Call<SuccessPostResponse>
-
 }
